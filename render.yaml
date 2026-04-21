@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: nlc-land-docs-api
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: FROM_EMAIL
+        value: noreply@neumlexcounsel.com
+      - key: SENTRY_DSN
+        sync: false
+      - key: FRONTEND_URL
+        value: https://nlc-land-docs.vercel.app
+      - key: ADMIN_SECRET_KEY
+        sync: false
+      - key: BKASH_APP_KEY
+        sync: false
+      - key: BKASH_APP_SECRET
+        sync: false
+      - key: BKASH_USERNAME
+        sync: false
+      - key: BKASH_PASSWORD
+        sync: false
+      - key: NAGAD_MERCHANT_ID
+        sync: false
+      - key: NAGAD_MERCHANT_KEY
+        sync: false
+      - key: SUPABASE_BUCKET
+        value: land-evidence
+
+  - type: worker
+    name: nlc-land-docs-worker
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    startCommand: celery -A app.workers.celery_app worker --loglevel=info --concurrency=2
+    envVars:
+      - fromGroup: nlc-land-docs-api

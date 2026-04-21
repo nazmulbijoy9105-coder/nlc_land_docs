@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+.vercel/
+dist/
+
+# Local
+*.log
+.DS_Store
+Thumbs.db

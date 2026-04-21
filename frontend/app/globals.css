@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #1a2744;
+    --gold: #c9a84c;
+    --pearl: #f8f6f0;
+    --cream: #fefcf8;
+    --border: rgba(26, 39, 68, 0.1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(201, 168, 76, 0.25);
+    color: var(--navy);
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--pearl); }
+  ::-webkit-scrollbar-thumb { background: rgba(26, 39, 68, 0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(26, 39, 68, 0.35); }
+}
+
+@layer components {
+  /* ── Card ─────────────────────────────────────────────── */
+  .card {
+    @apply bg-white rounded-2xl border border-navy-100/40 shadow-card;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  /* ── Buttons ──────────────────────────────────────────── */
+  .btn-primary {
+    @apply bg-navy text-white px-6 py-3 rounded-xl font-body font-medium text-sm
+           transition-all duration-150 hover:bg-navy-800 hover:shadow-md active:scale-95
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-gold {
+    @apply bg-gold text-white px-6 py-3 rounded-xl font-body font-medium text-sm
+           transition-all duration-150 hover:bg-gold-600 hover:shadow-gold-glow active:scale-95;
+  }
+  .btn-outline {
+    @apply border border-navy/20 text-navy px-6 py-3 rounded-xl font-body font-medium text-sm
+           transition-all duration-150 hover:bg-navy-50 hover:border-navy/40 active:scale-95;
+  }
+  .btn-ghost {
+    @apply text-navy/60 px-4 py-2 rounded-lg font-body text-sm
+           transition-colors hover:bg-navy-50 hover:text-navy;
+  }
+
+  /* ── Form inputs ──────────────────────────────────────── */
+  .input {
+    @apply w-full border border-navy-100/60 bg-white rounded-xl px-4 py-3 text-sm text-navy
+           placeholder:text-navy/30 outline-none transition-all
+           focus:border-gold/60 focus:ring-2 focus:ring-gold/10;
+  }
+  .select {
+    @apply input appearance-none cursor-pointer;
+  }
+  .label {
+    @apply block text-xs font-medium text-navy/60 mb-1.5 uppercase tracking-wide;
+  }
+
+  /* ── Risk badges ──────────────────────────────────────── */
+  .band-GREEN  { @apply bg-emerald-50 text-emerald-800 border border-emerald-200; }
+  .band-YELLOW { @apply bg-amber-50 text-amber-800 border border-amber-200; }
+  .band-RED    { @apply bg-red-50 text-red-800 border border-red-200; }
+  .band-BLACK  { @apply bg-gray-900 text-white border border-gray-700; }
+  .band-badge  { @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide; }
+
+  /* ── Status pills ─────────────────────────────────────── */
+  .pill-PASS   { @apply bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full; }
+  .pill-WARN   { @apply bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full; }
+  .pill-FAIL   { @apply bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full; }
+  .pill-NA     { @apply bg-gray-100 text-gray-500 text-xs font-bold px-2.5 py-1 rounded-full; }
+
+  /* ── Section title ────────────────────────────────────── */
+  .section-title {
+    @apply font-display text-2xl font-semibold text-navy;
+  }
+  .section-sub {
+    @apply text-sm text-navy/50 mt-1;
+  }
+
+  /* ── Gold divider ─────────────────────────────────────── */
+  .gold-line {
+    @apply h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent my-6;
+  }
+
+  /* ── Table ────────────────────────────────────────────── */
+  .data-table {
+    @apply w-full text-sm;
+  }
+  .data-table th {
+    @apply text-left text-xs font-semibold text-navy/50 uppercase tracking-wide py-3 px-4 bg-navy-50/50 border-b border-navy-100/30;
+  }
+  .data-table td {
+    @apply py-3 px-4 border-b border-navy-100/20 text-navy/80;
+  }
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+  .data-table tr:hover td {
+    @apply bg-navy-50/30;
+  }
+
+  /* ── Animations ───────────────────────────────────────── */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .pulse-gold {
+    animation: pulseGold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulseGold {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+}
